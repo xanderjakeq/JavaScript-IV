@@ -29,6 +29,13 @@ class Instructor extends Person{
     grade(student, subject){
         console.log(`${student.name} receives a perfect score on ${subject}`)
     }
+    randomGrading(student){
+        if(Math.random() > .5){
+            student.grade += 5
+        }else{
+            student.grade -= 5
+        }
+    }
 }
 
 class Student extends Person{
@@ -42,6 +49,7 @@ class Student extends Person{
         this.previousBackground = sAttr.previousBackground
         this.className = sAttr.className
         this.favSubjects = sAttr.favSubjects
+        this.grade = sAttr.grade || (Math.random() * 100) // if grade is not in sAttr, set it to random % of 100
     }
     listSubjects(){
         this.favSubjects.forEach(subject => {
@@ -55,6 +63,14 @@ class Student extends Person{
 
     sprintChallenge(subject) {
         console.log(`${student.name} has begun sprint challenge on ${subject}`)
+    }
+
+    graduate(){
+        if(this.grade > 70){ //70% of 100
+            return true //graduated
+        }else{
+            return false //Keep grading
+        }
     }
 }
 
